@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "27335085906",
+    "firebase_url": "https://dnd-application.firebaseio.com",
+    "project_id": "dnd-application",
+    "storage_bucket": "dnd-application.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27335085906:android:0c944975f6817d5be6348b",
+        "android_client_info": {
+          "package_name": "com.mlize.dungeon_seeker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27335085906-7sgfdufic5u2juie5qafit2ibkr9bcv9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQYhw3z2_Fs5AbcPNglEfriIEKHTrTzUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27335085906-7sgfdufic5u2juie5qafit2ibkr9bcv9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "27335085906-nl0fn9l8c0ihihj2gi9pj00a69jhtn72.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mlize.fk"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
