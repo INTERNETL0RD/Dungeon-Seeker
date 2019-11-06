@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 
-import './characters_screen.dart';
-import './rules_screen.dart';
-import '../widgets/characters_overview.dart';
-class TabsScreen extends StatefulWidget {
-  @override
-  _TabsScreenState createState() => _TabsScreenState();
-}
+import './players_screen.dart';
+import './dm_screen.dart';
 
-class _TabsScreenState extends State<TabsScreen> {
-  var _currentIndex = 0;
-  final _pages = [CharactersScreen(), RulesScreen()];
-
+class TabsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -38,15 +30,8 @@ class _TabsScreenState extends State<TabsScreen> {
             ],
           ),
         ),
-        body: Container(
-          padding: EdgeInsets.all(20),
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CharactersOverview()
-            ],
-          ),
+        body: TabBarView(
+          children: <Widget>[PlayersScreen(), DmScreen()],
         ),
       ),
     );
