@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../screens/add_character_screen.dart';
+
 class CharactersOverview extends StatelessWidget {
-  final playerCharacters = [1,2];
+  final playerCharacters = [];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -11,13 +13,25 @@ class CharactersOverview extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(20),
           child: Column(
-              children: playerCharacters.length <= 0
-                  ? [Center(child: Text("You have no characters!"))]
-                  : playerCharacters.map((character) {
-                      return Card(
-                        child: Text("Character!"),
-                      );
-                    }).toList()),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                if (playerCharacters.length <= 0)
+                  Center(child: Text("You have no characters!"))
+                else
+                  ...playerCharacters.map((character) {
+                    return Card(
+                      child: Text("Character!"),
+                    );
+                  }).toList(),
+                IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AddCharacterScreen.routeName);
+                  },
+                  alignment: Alignment.center,
+                  color: Theme.of(context).accentColor,
+                )
+              ]),
         )
       ],
     );
