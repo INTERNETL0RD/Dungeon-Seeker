@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/stats_creation_container.dart';
+
 class AddCharacterScreen extends StatefulWidget {
   static const routeName = "/add-character";
 
@@ -81,7 +83,8 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
-                style: TextStyle(color: Theme.of(context).textTheme.body2.color),
+                style:
+                    TextStyle(color: Theme.of(context).textTheme.body2.color),
                 decoration: InputDecoration(
                     labelText: "Name",
                     labelStyle: TextStyle(
@@ -96,36 +99,59 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
               Row(
                 children: <Widget>[
                   Expanded(
-                   child: _buildDropDown(races, "race",
-                        (newValue) => setState(() => raceValue = newValue), raceValue),
+                    child: _buildDropDown(
+                        races,
+                        "race",
+                        (newValue) => setState(() => raceValue = newValue),
+                        raceValue),
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Expanded(
-                    child: _buildDropDown(classes, "class",
-                        (newValue) => setState(() => classValue = newValue), classValue),
-                        
+                    child: _buildDropDown(
+                        classes,
+                        "class",
+                        (newValue) => setState(() => classValue = newValue),
+                        classValue),
                   ),
                 ],
               ),
               Row(
                 children: <Widget>[
                   Expanded(
-                   child: _buildDropDown(backgrounds, "background",
-                        (newValue) => setState(() => backgroundValue = newValue), backgroundValue),
+                    child: _buildDropDown(
+                        backgrounds,
+                        "background",
+                        (newValue) =>
+                            setState(() => backgroundValue = newValue),
+                        backgroundValue),
                   ),
                   SizedBox(
                     width: 10,
                   ),
                   Expanded(
-                    child: _buildDropDown(List.generate(20, (i) => "${i+1}"), "starting level",
-                        (newValue) => setState(() => levelValue = newValue), levelValue),
-                        
+                    child: _buildDropDown(
+                        List.generate(20, (i) => "${i + 1}"),
+                        "starting level",
+                        (newValue) => setState(() => levelValue = newValue),
+                        levelValue),
                   ),
                 ],
               ),
-             
+              Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  child: FlatButton(
+                    child: Text(
+                      "Next Step",
+                      style: TextStyle(
+                          color: Theme.of(context).textTheme.body2.color),
+                    ),
+                    onPressed: () {},
+                    color: Theme.of(context).accentColor,
+                  )),
+              StatsCreationContainer(),
             ],
           ),
         ),
