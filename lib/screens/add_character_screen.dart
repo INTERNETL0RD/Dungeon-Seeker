@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/stats_creation_container.dart';
+import '../widgets/core_inputs.dart';
 
 class AddCharacterScreen extends StatefulWidget {
   static const routeName = "/add-character";
@@ -14,61 +15,27 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
   String classValue;
   String backgroundValue;
   String levelValue;
+  int creationPhase = 0;
+  int strVal = 10;
+  int dexVal = 10;
+  int conVal = 10;
+  int intVal = 10;
+  int wisVal = 10;
+  int chaVal = 10;
 
-  Widget _buildDropDown(List<String> iterable, fieldName, Function f, value) {
-    return DropdownButton<String>(
-      onChanged: f,
-      underline: Container(
-        height: 2,
-        color: Theme.of(context).accentColor,
-      ),
-      isExpanded: true,
-      value: value,
-      hint: Text("Choose a $fieldName"),
-      icon: Icon(
-        Icons.arrow_drop_down,
-        color: Theme.of(context).accentColor,
-      ),
-      items: iterable.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value,
-              style: TextStyle(color: Theme.of(context).textTheme.body2.color)),
-        );
-      }).toList(),
-    );
-  }
-
+  void setBkd(newValue) => setState(() => backgroundValue = newValue);
+  void setClass(newValue) => setState(() => classValue = newValue);
+  void setRace(newValue) => setState(() => raceValue = newValue);
+  void setLevel(newValue) => setState(() => levelValue = newValue);
+  void setStr(int addedNum) => setState(() => strVal += addedNum);
+  void setDex(int addedNum) => setState(() => dexVal += addedNum);
+  void setCon(int addedNum) => setState(() => conVal += addedNum);
+  void setInt(int addedNum) => setState(() => intVal += addedNum);
+  void setWis(int addedNum) => setState(() => wisVal += addedNum);
+  void setCha(int addedNum) => setState(() => chaVal += addedNum);
+  void advancePhase() => setState(() => creationPhase++);
   @override
   Widget build(BuildContext context) {
-    const races = [
-      "Dwarf",
-      "Elf",
-      "Halfling",
-      "Human",
-      "Dragonborn",
-      "Gnome",
-      "Half-Elf",
-      "Half-Orc",
-      "Tiefling"
-    ];
-    const classes = [
-      "Barbarian",
-      "Bard",
-      "Cleric",
-      "Druid",
-      "Fighter",
-      "Monk",
-      "Paladin",
-      "Ranger",
-      "Rogue",
-      "Sorcerer",
-      "Warlock",
-      "Wizard"
-    ];
-    const backgrounds = [
-      "Acolyte",
-    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -80,78 +47,36 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
         padding: const EdgeInsets.all(15),
         child: Form(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              TextFormField(
-                style:
-                    TextStyle(color: Theme.of(context).textTheme.body2.color),
-                decoration: InputDecoration(
-                    labelText: "Name",
-                    labelStyle: TextStyle(
-                        color: Theme.of(context).textTheme.body2.color),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Theme.of(context).accentColor, width: 2)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Theme.of(context).accentColor, width: 2))),
+              CoreInputs(
+                raceValue: raceValue,
+                classValue: classValue,
+                backgroundValue: backgroundValue,
+                levelValue: levelValue,
+                isEnabled: creationPhase == 0,
+                setBkd: setBkd,
+                setClass: setClass,
+                setRace: setRace,
+                setLevel: setLevel,
+                advancePhase: advancePhase,
               ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: _buildDropDown(
-                        races,
-                        "race",
-                        (newValue) => setState(() => raceValue = newValue),
-                        raceValue),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: _buildDropDown(
-                        classes,
-                        "class",
-                        (newValue) => setState(() => classValue = newValue),
-                        classValue),
-                  ),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: _buildDropDown(
-                        backgrounds,
-                        "background",
-                        (newValue) =>
-                            setState(() => backgroundValue = newValue),
-                        backgroundValue),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: _buildDropDown(
-                        List.generate(20, (i) => "${i + 1}"),
-                        "starting level",
-                        (newValue) => setState(() => levelValue = newValue),
-                        levelValue),
-                  ),
-                ],
-              ),
-              Container(
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: FlatButton(
-                    child: Text(
-                      "Next Step",
-                      style: TextStyle(
-                          color: Theme.of(context).textTheme.body2.color),
-                    ),
-                    onPressed: () {},
-                    color: Theme.of(context).accentColor,
-                  )),
-              StatsCreationContainer(),
+              if (creationPhase >= 1)
+                StatsCreationContainer(
+                  strVal: strVal,
+                  dexVal: dexVal,
+                  conVal: conVal,
+                  intVal: intVal,
+                  wisVal: wisVal,
+                  chaVal: chaVal,
+                  setCha: setCha,
+                  setCon: setCon,
+                  setDex: setDex,
+                  setInt: setInt,
+                  setStr: setStr,
+                  setWis: setWis,
+                  isEnabled: creationPhase ==1,
+                  advancePhase: advancePhase,
+                )
             ],
           ),
         ),
