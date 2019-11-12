@@ -1,3 +1,4 @@
+import 'package:dungeon_seeker/widgets/skills_selector.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/stats_creation_container.dart';
@@ -22,6 +23,7 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
   int intVal = 10;
   int wisVal = 10;
   int chaVal = 10;
+  List<String> skillsSelected = [];
 
   void setBkd(newValue) => setState(() => backgroundValue = newValue);
   void setClass(newValue) => setState(() => classValue = newValue);
@@ -34,6 +36,7 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
   void setWis(int addedNum) => setState(() => wisVal += addedNum);
   void setCha(int addedNum) => setState(() => chaVal += addedNum);
   void advancePhase() => setState(() => creationPhase++);
+  void editSkillsValues(String value, int i) => setState(() => skillsSelected[i] = value);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,41 +46,44 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
           style: Theme.of(context).textTheme.title,
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(15),
-        child: Form(
-          child: Column(
-            children: <Widget>[
-              CoreInputs(
-                raceValue: raceValue,
-                classValue: classValue,
-                backgroundValue: backgroundValue,
-                levelValue: levelValue,
-                isEnabled: creationPhase == 0,
-                setBkd: setBkd,
-                setClass: setClass,
-                setRace: setRace,
-                setLevel: setLevel,
-                advancePhase: advancePhase,
-              ),
-              if (creationPhase >= 1)
-                StatsCreationContainer(
-                  strVal: strVal,
-                  dexVal: dexVal,
-                  conVal: conVal,
-                  intVal: intVal,
-                  wisVal: wisVal,
-                  chaVal: chaVal,
-                  setCha: setCha,
-                  setCon: setCon,
-                  setDex: setDex,
-                  setInt: setInt,
-                  setStr: setStr,
-                  setWis: setWis,
-                  isEnabled: creationPhase ==1,
+      body: SingleChildScrollView(
+              child: Container(
+          padding: const EdgeInsets.all(15),
+          child: Form(
+            child: Column(
+              children: <Widget>[
+                CoreInputs(
+                  raceValue: raceValue,
+                  classValue: classValue,
+                  backgroundValue: backgroundValue,
+                  levelValue: levelValue,
+                  isEnabled: creationPhase == 0,
+                  setBkd: setBkd,
+                  setClass: setClass,
+                  setRace: setRace,
+                  setLevel: setLevel,
                   advancePhase: advancePhase,
-                )
-            ],
+                ),
+                if (creationPhase >= 1)
+                  StatsCreationContainer(
+                    strVal: strVal,
+                    dexVal: dexVal,
+                    conVal: conVal,
+                    intVal: intVal,
+                    wisVal: wisVal,
+                    chaVal: chaVal,
+                    setCha: setCha,
+                    setCon: setCon,
+                    setDex: setDex,
+                    setInt: setInt,
+                    setStr: setStr,
+                    setWis: setWis,
+                    isEnabled: creationPhase ==1,
+                    advancePhase: advancePhase,
+                  ),
+                  if(creationPhase >= 2) SkillsSelector(classValue, skillsSelected, editSkillsValues) 
+              ],
+            ),
           ),
         ),
       ),

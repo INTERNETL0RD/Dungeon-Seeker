@@ -91,8 +91,8 @@ class StatsCreationContainer extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  "Select the initial ability scores",
+                Text(isEnabled ?
+                  "Select the initial ability scores" : "Initial ability scores",
                   style: TextStyle(
                       fontSize: 20,
                       color: Theme.of(context).textTheme.body2.color),

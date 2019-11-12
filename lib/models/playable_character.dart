@@ -14,6 +14,7 @@ class PlayableCharacter {
   final List<Equipment> equipment;
   final int currentHitPoints;
   final int totalHitPoints;
+  final Map<String,Map<String, dynamic>> skills;
 
   PlayableCharacter(
       {this.name,
@@ -24,5 +25,6 @@ class PlayableCharacter {
       this.spells,
       this.equipment,
       this.currentHitPoints,
-      this.totalHitPoints});
+      this.totalHitPoints,
+      this.skills});
 }
